@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spyres of Myst-fortune — Quests</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('spyres-theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && prefersDark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) { /* localStorage disabled — fall back to light */ }
+    })();
+  </script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="masthead-top">
+        <div class="masthead-brand">
+          <a href="index.html" class="masthead-logo-link">
+            <img src="images/CampaignIcon.png" alt="Spyres of Myst-fortune logo" class="masthead-logo">
+          </a>
+          <h1 class="wordmark">Spyres of <span class="flourish">Myst-fortune</span></h1>
+        </div>
+        <button class="theme-toggle" type="button"
+                aria-label="Toggle dark mode" title="Toggle dark mode"
+                onclick="spyresToggleTheme()">
+          <span id="theme-icon" aria-hidden="true">☾</span>
+        </button>
+      </div>
+      <nav class="ledger-nav">
+        <a href="index.html" class="">Setup</a>
+        <a href="ledger.html" class="">Ledger</a>
+        <a href="characters.html" class="">Characters</a>
+        <a href="enemies.html" class="">Enemies</a>
+        <a href="quests.html" class="active">Quests &amp; Threads</a>
+        <a href="lore.html" class="">Lore</a>
+      </nav>
+    </div>
+  </header>
+  <script>
+    /* Sync the toggle icon with the current theme on load, then flip on click. */
+    (function () {
+      var iconFor = function (theme) { return theme === 'dark' ? '☀' : '☾'; };
+      var iconEl = document.getElementById('theme-icon');
+      if (iconEl) {
+        iconEl.textContent = iconFor(document.documentElement.getAttribute('data-theme'));
+      }
+      window.spyresToggleTheme = function () {
+        var cur = document.documentElement.getAttribute('data-theme');
+        var next = cur === 'dark' ? 'light' : 'dark';
+        if (next === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+        try { localStorage.setItem('spyres-theme', next); } catch (e) {}
+        if (iconEl) iconEl.textContent = iconFor(next);
+      };
+    })();
+  </script>
+  <main>
+    
+  <div class="eyebrow">Obligations & unfinished business</div>
+
+  <h2 class="section-head">Quests <span class="count">0</span></h2>
+  
+    <div class="empty">No quests recorded yet.</div>
+  
+
+  <h2 id="loose-ends" class="section-head">Loose ends <span class="count">0</span></h2>
+  
+    <div class="empty">No loose ends recorded yet.</div>
+  
+
+  </main>
+  <footer>
+    Kept locally on your machine · 0 session(s) chronicled
+    
+  </footer>
+</body>
+</html>

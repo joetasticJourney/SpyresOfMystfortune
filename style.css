@@ -1,0 +1,886 @@
+/* ============================================================
+   Spyres of Myst-fortune — three-colour palette
+   Brand:      #1EBDE4  (logo cyan)
+   Text:       near-black
+   Background: cool near-white
+   Everything else is a shade of those three (WCAG-safe pairings).
+   Type: Fraunces (display, characterful serif) + Inter (data/body)
+   ============================================================ */
+
+:root {
+  /* -- the three -- */
+  --brand:       #1ebde4;   /* logo cyan — accents, active states, borders */
+  --brand-deep:  #0f7a94;   /* darker cyan for text/links on light bg      */
+  --brand-tint:  #dff1f6;   /* very pale cyan for hover fills on light bg  */
+  --ink:         #1a1d21;   /* body text — near-black, slight warmth       */
+  --bg:          #d9dde3;   /* page background — slate-tinged cool grey    */
+
+  /* -- disciplined greys derived from the three (needed for hierarchy) -- */
+  --ink-soft:    #4a5058;   /* secondary text                              */
+  --muted:       #7a808a;   /* tertiary text, timestamps                   */
+  --surface:     #ecf0f4;   /* card/panel — clearly lighter than bg        */
+  --border:      #bfc6cd;   /* borders / ruling lines — visible on new bg  */
+  --shadow:      rgba(26, 29, 33, 0.08);
+
+  /* -- legacy variable names kept so unmigrated rules still work -- */
+  --vellum:      var(--bg);
+  --vellum-deep: var(--bg);
+  --rule:        var(--border);
+  --paper-edge:  var(--border);
+  --teal:        var(--brand);
+  --teal-deep:   var(--brand-deep);
+  --gilt:        var(--brand-deep);
+  --verdigris:   var(--brand);
+  --oxblood:     var(--ink);
+}
+
+/* -- dark mode: only the five base tokens flip; every derived rule follows -- */
+[data-theme="dark"] {
+  --brand:       #1ebde4;   /* logo cyan stays — high contrast on dark too */
+  --brand-deep:  #5dd4f0;   /* lighter cyan for text on dark bg            */
+  --brand-tint:  rgba(30, 189, 228, 0.14);
+  --ink:         #e6e8ec;   /* body text on dark                           */
+  --bg:          #16181c;
+
+  --ink-soft:    #a8adb5;
+  --muted:       #6e7480;
+  --surface:     #1e2126;
+  --border:      #2d3138;
+  --shadow:      rgba(0, 0, 0, 0.4);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a, .entry, .seal { transition: color .15s ease, background .15s ease, transform .15s ease; }
+}
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1.4rem 2rem 1rem;
+}
+.masthead-inner { max-width: 1080px; margin: 0 auto; }
+
+.masthead-brand {
+  display: flex; align-items: center; gap: 0.9rem;
+}
+.masthead-logo-link { line-height: 0; }
+.masthead-logo {
+  height: clamp(3rem, 6.5vw, 4.6rem);
+  width: auto;
+  display: block;
+  /* Small drop shadow to seat the transparent PNG against the parchment. */
+  filter: drop-shadow(0 1px 2px var(--shadow));
+}
+
+.wordmark {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--ink);
+}
+.wordmark .flourish { color: var(--brand); font-style: italic; }
+
+/* --- masthead top row: brand on left, theme toggle on right --- */
+.masthead-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.theme-toggle {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink-soft);
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.theme-toggle:hover {
+  color: var(--brand-deep);
+  border-color: var(--brand);
+  background: var(--brand-tint);
+}
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+nav.ledger-nav {
+  display: flex;
+  gap: 1.6rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+nav.ledger-nav a {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+}
+nav.ledger-nav a:hover,
+nav.ledger-nav a.active { color: var(--ink); border-bottom-color: var(--gilt); }
+
+/* ---------- layout ---------- */
+
+main { max-width: 1080px; margin: 0 auto; padding: 2rem; }
+
+.section-head {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2.2rem 0 0.4rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.section-head:first-child { margin-top: 0; }
+.section-head .count {
+  font-family: "Inter", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 1px 7px;
+}
+.eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--teal-deep);
+  margin-bottom: 1.4rem;
+}
+
+/* Full-width block image used under the Setup "The World" heading
+   and anywhere else a map/establishing-shot sits above body text. */
+.world-map {
+  display: block;
+  width: 100%;
+  max-width: 1080px;
+  height: auto;
+  margin: 0.6rem 0 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- ledger entries (the signature) ---------- */
+
+.ledger { border-top: 1px solid var(--rule); }
+
+.entry {
+  display: grid;
+  grid-template-columns: 26px 1fr minmax(110px, 180px);
+  gap: 0 0.9rem;
+  align-items: start;
+  padding: 0.85rem 0.4rem;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: inherit;
+}
+a.entry:hover { background: var(--brand-tint); }
+
+.seal {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  margin-top: 6px;
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,0.15), 0 1px 2px var(--shadow);
+}
+.seal.active, .seal.open      { background: var(--verdigris); }
+.seal.completed               { background: var(--gilt); }
+.seal.dead, .seal.failed,
+.seal.abandoned               { background: var(--oxblood); }
+.seal.missing, .seal.retired  { background: var(--ink-soft); }
+
+.entry-title {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.12rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.entry-sub { font-size: 0.86rem; color: var(--ink-soft); margin-top: 0.1rem; }
+.entry-body { font-size: 0.92rem; margin-top: 0.35rem; color: var(--ink-soft); }
+
+.entry-meta {
+  text-align: right;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-top: 4px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.tally { font-variant-numeric: tabular-nums; }
+.tally b { font-family: "Fraunces", serif; font-size: 1.05rem; color: var(--ink); }
+
+/* pill for quest/character status word */
+.status-word {
+  display: inline-block;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 1px 8px;
+  border-radius: 2px;
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
+}
+.status-word.completed { color: var(--gilt); border-color: var(--gilt); }
+.status-word.dead, .status-word.failed { color: var(--oxblood); border-color: var(--oxblood); }
+.status-word.open, .status-word.active { color: var(--verdigris); border-color: var(--verdigris); }
+
+/* per-row cull checkbox + batch "Remove selected" bar */
+.cull-check {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+.cull-check input { accent-color: var(--oxblood); cursor: pointer; }
+.cull-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.8rem 0.4rem 0;
+}
+.cull-btn {
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+.cull-btn:hover { color: var(--ink); border-color: var(--ink); background: rgba(26, 29, 33, 0.04); }
+
+/* ---------- dashboard cards ---------- */
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+}
+.card {
+  border: 1px solid var(--paper-edge);
+  border-top: 3px solid var(--ink);
+  background: rgba(255,255,255,0.28);
+  padding: 1.1rem 1.2rem;
+}
+a.card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+a.card-link:hover {
+  background: rgba(28, 153, 184, 0.08);   /* faint teal wash */
+  border-top-color: var(--teal-deep);
+}
+.card h3 {
+  margin: 0 0 0.6rem;
+  font-family: "Fraunces", serif;
+  font-size: 1.1rem;
+}
+.big-stat {
+  font-family: "Fraunces", serif;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--teal-deep);
+}
+.big-stat small {
+  display: block;
+  font-family: "Inter", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 0.4rem;
+}
+
+/* ---------- talk-time bars ---------- */
+
+.talkbar-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 100px;
+  align-items: center;
+  column-gap: 0.5rem;
+  padding: 0.4rem 0;
+}
+.talkbar-name { font-weight: 600; font-size: 0.92rem; }
+.talkbar-track {
+  height: 22px;
+  background: rgba(26, 29, 33, 0.05);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+.talkbar-fill {
+  display: block;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg, var(--brand), var(--brand) 6px,
+    rgba(30, 189, 228, 0.35) 6px, rgba(30, 189, 228, 0.35) 12px);
+}
+.talkbar-pct {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.9), 0 0 2px rgba(255, 255, 255, 0.9);
+  line-height: 1;
+  pointer-events: none;
+}
+.talkbar-val {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.2;
+}
+.talkbar-val-words { font-size: 0.76rem; opacity: 0.75; }
+
+/* ---------- narrative prose ---------- */
+
+.narrative {
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;   /* match body text */
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 68ch;
+  color: var(--ink-soft);   /* one shade quieter than headings */
+}
+.narrative p {
+  margin: 0 0 1.1rem;
+}
+
+/* ---------- band renown (gigs page) ---------- */
+
+.renown-block { display: flex; align-items: center; gap: 0.85rem; max-width: 24rem; }
+.renown-track {
+  flex: 1; height: 14px; background: var(--rule); border-radius: 7px;
+  overflow: hidden; box-shadow: inset 0 1px 2px rgba(0,0,0,0.08);
+}
+.renown-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal), var(--teal-deep));
+  transition: width 0.3s ease;
+}
+.renown-val { font-family: "Fraunces", Georgia, serif; font-size: 1.1rem; color: var(--ink); white-space: nowrap; }
+.renown-val b { font-size: 1.4rem; color: var(--teal-deep); }
+
+/* ---------- best quotes (session page) ---------- */
+
+.quotes-groups { display: flex; flex-direction: column; gap: 1.1rem; margin-bottom: 1.5rem; }
+.quote-group { border-left: 3px solid var(--teal-deep); padding: 0.15rem 0 0.15rem 0.9rem; }
+.quote-speaker { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 1.05rem; margin-bottom: 0.35rem; }
+.quote-list { list-style: none; padding: 0; margin: 0; }
+.quote-list li { font-family: "Fraunces", Georgia, serif; font-style: italic; line-height: 1.55; margin: 0.15rem 0; color: var(--ink, inherit); }
+
+/* ---------- character-page collapsible sections ----------
+   Fun Facts / Notable Quotes / Kills / Session Notes all reuse
+   .dev-list + .dev-entry (see below) for a uniform look. These add-ons
+   are just the delete affordance for Notable Quotes and italic body for
+   in-character quotes. */
+
+/* Kill entries: give each one the same brand-cyan left rule as the
+   Best Quotes speaker blocks on the session page, so kill boundaries
+   are obvious even when descriptions span multiple lines. Overrides the
+   default .dev-entry p padding-left so the rule sits flush. */
+.dev-kill {
+  border-left: 3px solid var(--brand-deep);
+  padding-left: 0.9rem !important;
+  margin: 0.35rem 0 0.55rem !important;
+}
+
+.dev-quote {
+  display: flex; align-items: baseline; gap: 0.4rem;
+  font-style: italic;
+}
+.dev-quote > span { flex: 1; }
+.dev-del-form { display: inline; margin: 0; }
+.dev-del {
+  background: transparent; border: none; color: var(--ink-soft);
+  cursor: pointer; font-size: 1rem; padding: 0 0.3rem; line-height: 1;
+  font-family: inherit;
+  opacity: 0.4; transition: opacity 0.15s ease, color 0.15s ease;
+}
+.dev-entry:hover .dev-del { opacity: 1; }
+.dev-del:hover { color: var(--oxblood); }
+.narrative p:last-child {
+  margin-bottom: 0;
+}
+.narrative p:first-of-type::first-letter {
+  font-family: "Fraunces", Georgia, serif;   /* keep the drop-cap serif-decorative */
+  font-size: 3.2rem;
+  float: left;
+  line-height: 0.8;
+  padding: 0.1em 0.12em 0 0;
+  color: var(--brand);
+  font-weight: 600;
+}
+
+.dev-list { padding: 0; margin: 0.6rem 0 0; }
+/* Section heading (a <summary> when the wrapper is a <details>). Behaves like
+   a clickable header with a disclosure triangle. */
+.dev-heading {
+  cursor: pointer;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-soft);
+  margin-bottom: 0.3rem;
+  padding: 0.15rem 0;
+  outline: none;
+  list-style: none;
+}
+.dev-heading::-webkit-details-marker { display: none; }
+.dev-heading::before {
+  content: "▸";
+  display: inline-block;
+  margin-right: 0.4rem;
+  font-size: 0.7em;
+  color: var(--ink-soft);
+  transition: transform 0.15s ease;
+}
+details[open] > .dev-heading::before {
+  transform: rotate(90deg);
+  color: var(--teal-deep);
+}
+details[open] > .dev-heading { color: var(--teal-deep); }
+.dev-heading:hover { color: var(--teal-deep); }
+.dev-entry {
+  border-left: 2px solid var(--rule);
+  padding: 0 0 0 0.75rem;
+  margin: 0 0 0.25rem;
+}
+.dev-entry summary {
+  cursor: pointer;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--gilt);
+  padding: 0.15rem 0;
+  outline: none;
+  list-style: none;                 /* hide default marker in most browsers */
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.dev-entry summary::-webkit-details-marker { display: none; }
+.dev-entry summary::before {
+  content: "▸";
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  transition: transform 0.15s ease;
+  display: inline-block;
+}
+.dev-entry[open] summary::before {
+  transform: rotate(90deg);
+  color: var(--teal-deep);
+}
+.dev-entry[open] summary { color: var(--teal-deep); }
+.dev-entry summary:hover { color: var(--teal-deep); }
+.dev-entry p {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin: 0.15rem 0 0.55rem;
+  padding-left: 1.1rem;
+}
+
+/* Count pill used by the shared .dev-heading and each .dev-entry summary. */
+.ff-count {
+  display: inline-block;
+  min-width: 1.2rem;
+  padding: 0 0.35rem;
+  font-size: 0.62rem;
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: 0.6rem;
+  text-align: center;
+}
+/* Stack collapsible sections tightly and give each section a little air. */
+.dev-list + .dev-list { margin-top: 0.9rem; }
+/* Keep the section-heading count pill aligned inline with the label. */
+.dev-heading { display: flex; align-items: center; gap: 0.4rem; }
+
+/* Legacy — session-notes-source label used in a couple older places. Kept
+   so existing markup that still emits <span class="ff-src"> stays styled. */
+.ff-src {
+  margin-left: 0.35rem;
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  opacity: 0.7;
+}
+
+.empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--ink-soft);
+  font-style: italic;
+  border: 1px dashed var(--rule);
+}
+
+footer {
+  max-width: 1080px;
+  margin: 3rem auto 2rem;
+  padding: 1rem 2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+}
+
+a.plain { color: var(--verdigris); }
+
+/* ---------- spellbook chips ---------- */
+.spellbook { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.spell-chip {
+  font-size: 0.76rem;
+  padding: 2px 9px;
+  border: 1px solid var(--verdigris);
+  border-radius: 2px;
+  color: var(--verdigris);
+  background: rgba(58, 107, 95, 0.06);
+  letter-spacing: 0.02em;
+}
+.spell-chip b { color: var(--ink); font-family: "Fraunces", serif; }
+
+/* ---------- chip groups (weapons / spells / damage) ---------- */
+.chip-group { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+.chip-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  margin-right: 0.2rem;
+}
+
+/* ---------- transcript ---------- */
+.transcript-link {
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--verdigris);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  align-self: center;
+}
+.transcript-link:hover { border-bottom-color: var(--verdigris); }
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  margin: 0.4rem 0 1.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+.filter-chip {
+  --spk: var(--ink-soft);
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
+  padding: 3px 11px;
+  border: 1px solid var(--spk);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--spk);
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity .12s ease, background .12s ease;
+}
+.filter-chip.active { opacity: 1; background: color-mix(in srgb, var(--spk) 10%, transparent); }
+.filter-chip:hover { opacity: 0.85; }
+
+.transcript { border-top: 1px solid var(--rule); }
+.line {
+  display: grid;
+  grid-template-columns: 74px 130px 1fr;
+  gap: 0 0.9rem;
+  padding: 0.5rem 0.3rem;
+  border-bottom: 1px solid rgba(200, 185, 143, 0.4);
+  align-items: baseline;
+}
+.line-ts {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  opacity: 0.7;
+}
+.line-speaker {
+  --spk: var(--ink);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--spk);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.line-text { font-size: 0.95rem; line-height: 1.55; }
+
+@media (max-width: 640px) {
+  .line { grid-template-columns: 60px 1fr; }
+  .line-speaker { grid-column: 2; font-size: 0.82rem; }
+  .line-ts { grid-row: span 2; }
+  .line-text { grid-column: 2; }
+}
+
+/* ---------- character portraits ---------- */
+.portrait-wrap {
+  position: relative;
+  display: inline-block;
+  margin-top: 4px;
+  grid-row: span 1;
+}
+.portrait-placeholder {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  margin-top: 4px;
+  grid-row: span 1;
+  /* invisible slot — no border, no hover, just holds the space */
+}
+
+/* Visible empty-portrait state — dashed frame with a subtle plus glyph.
+   Reuses .portrait sizing so the grid slot stays identical. */
+.portrait-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: dashed;
+  border-color: var(--rule);
+  background: rgba(26, 29, 33, 0.02);
+  color: var(--ink-soft);
+  font-family: "Fraunces", serif;
+  font-size: 1.8rem;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Click-to-upload overlay covers the whole portrait area. The <label>
+   forwards clicks to the hidden file input inside it. */
+.portrait-upload { margin: 0; }
+.portrait-upload-label {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.portrait-file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.portrait-wrap:hover .portrait { border-color: var(--brand); }
+.portrait-wrap:hover .portrait-empty {
+  border-color: var(--brand);
+  color: var(--brand-deep);
+  background: var(--brand-tint);
+}
+.portrait {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+  box-shadow: 0 1px 3px var(--shadow);
+  display: block;
+}
+.portrait-peek {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 12px);
+  transform: translateY(-50%);
+  max-width: 340px;
+  max-height: 440px;
+  width: auto;
+  height: auto;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  background: var(--vellum);
+  padding: 6px;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.12s ease;
+}
+.portrait-wrap:hover .portrait-peek,
+.portrait-wrap:focus-within .portrait-peek {
+  opacity: 1;
+  visibility: visible;
+}
+/* when a portrait is present, widen the seal column area to fit it */
+.entry.has-portrait {
+  grid-template-columns: 26px 72px 1fr minmax(110px, 180px);
+}
+
+/* ============================================================
+   Mobile — vertical phone layout
+   Collapses the multi-column ledger grid to a stacked flow,
+   trims chrome padding, keeps tap targets legible.
+   ============================================================ */
+
+@media (max-width: 640px) {
+  html { -webkit-text-size-adjust: 100%; }
+  body { font-size: 15px; line-height: 1.55; }
+
+  /* ---- outer chrome ---- */
+  main { padding: 0.9rem 0.7rem 2rem; }
+  .masthead { padding: 0.85rem 0.7rem 0.7rem; }
+  footer { padding: 1rem 0.7rem; margin-top: 2rem; font-size: 0.72rem; }
+
+  .campaign-name { letter-spacing: 0.14em; font-size: 0.7rem; }
+
+  nav.ledger-nav { gap: 0.55rem 0.9rem; margin-top: 0.7rem; }
+  nav.ledger-nav a { font-size: 0.7rem; letter-spacing: 0.08em; }
+
+  /* ---- section headings ---- */
+  .section-head {
+    font-size: 1.18rem;
+    margin: 1.4rem 0 0.35rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .section-head .count { font-size: 0.66rem; padding: 1px 6px; }
+  .eyebrow { font-size: 0.66rem; margin-bottom: 0.9rem; letter-spacing: 0.16em; }
+
+  /* ---- ledger rows (no portrait): seal | content over meta ----
+     Explicit placement for all 3 direct children so nothing auto-collides. */
+  .entry {
+    grid-template-columns: 16px 1fr;
+    gap: 0.15rem 0.55rem;
+    padding: 0.7rem 0.15rem;
+  }
+  .entry > *:nth-child(1) { grid-column: 1; grid-row: 1; }
+  .entry > *:nth-child(2) { grid-column: 2; grid-row: 1; min-width: 0; }
+  .entry > *:nth-child(3) {  /* meta */
+    grid-column: 2; grid-row: 2;
+    text-align: left;
+    padding-top: 0.45rem;
+    margin-top: 0.45rem;
+    border-top: 1px dotted var(--rule);
+    font-size: 0.7rem;
+  }
+  .entry-title { font-size: 1rem; line-height: 1.3; }
+  .entry-body { font-size: 0.88rem; }
+  .entry-sub { font-size: 0.82rem; }
+  .seal { width: 11px; height: 11px; margin-top: 5px; }
+
+  /* ---- ledger rows (with portrait): seal + portrait + content, meta full-width below ---- */
+  .entry.has-portrait {
+    grid-template-columns: 16px 52px 1fr;
+    grid-template-rows: auto auto;
+    row-gap: 0.5rem;
+    column-gap: 0.55rem;
+  }
+  .entry.has-portrait > *:nth-child(1) { grid-column: 1; grid-row: 1; }  /* seal */
+  .entry.has-portrait > *:nth-child(2) { grid-column: 2; grid-row: 1; align-self: start; }  /* portrait */
+  .entry.has-portrait > *:nth-child(3) { grid-column: 3; grid-row: 1; min-width: 0; }  /* content */
+  .entry.has-portrait > *:nth-child(4) {  /* meta */
+    grid-column: 1 / -1; grid-row: 2;
+    text-align: left;
+    padding-top: 0.55rem;
+    border-top: 1px dotted var(--rule);
+    font-size: 0.7rem;
+  }
+  .portrait, .portrait-empty, .portrait-placeholder {
+    width: 52px; height: 52px;
+  }
+  .portrait-empty { font-size: 1.5rem; }
+
+  /* Stat tally block: a bit tighter and tabular-numeric */
+  .entry-meta.tally { line-height: 1.6; }
+  .entry-meta.tally b { font-size: 0.92rem; }
+
+  /* Chip groups: tighter gaps, smaller chips */
+  .chip-group { gap: 0.3rem; margin-top: 0.4rem; }
+  .spell-chip { font-size: 0.72rem; padding: 2px 7px; }
+
+  /* Fun-facts + dev-list: reduce indentation so they don't crowd narrow rows */
+  .dev-list { margin-top: 0.4rem; }
+  .dev-entry p { padding-left: 0.6rem; font-size: 0.82rem; }
+  .ff-list { padding-left: 1rem; font-size: 0.82rem; }
+  .fun-facts { padding-left: 0.55rem; }
+
+  /* ---- dashboard cards ---- */
+  .grid-3 {
+    gap: 0.7rem;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+  .big-stat { font-size: 1.9rem; }
+  .big-stat small { font-size: 0.62rem; letter-spacing: 0.12em; margin-top: 0.3rem; }
+  .card { padding: 0.8rem 0.9rem; }
+
+  /* ---- talk-time bars ---- */
+  .talkbar-row {
+    grid-template-columns: 1fr auto;
+    gap: 0.2rem 0.5rem;
+    padding: 0.35rem 0;
+  }
+  .talkbar-name { grid-column: 1 / -1; font-size: 0.86rem; }
+  .talkbar-track { grid-column: 1; height: 16px; }
+  .talkbar-val { grid-column: 2; font-size: 0.74rem; }
+
+  /* ---- loose-ends batch UI ---- */
+  .cull-bar { flex-wrap: wrap; gap: 0.4rem; padding-top: 0.6rem; }
+  .cull-btn { padding: 8px 14px; font-size: 0.74rem; }
+  .cull-check { padding: 6px; }
+  .cull-check input { transform: scale(1.15); }
+
+  /* ---- narrative: kill the giant drop-cap ---- */
+  .narrative { font-size: 0.98rem; line-height: 1.62; }
+  .narrative p:first-of-type::first-letter { font-size: 2rem; padding: 0.05em 0.1em 0 0; }
+
+  /* ---- transcript filter chips ---- */
+  .filter-chip { padding: 5px 11px; font-size: 0.74rem; }
+}
+
+/* Touch devices: hover-only portrait peek can't be triggered, so hide it
+   entirely instead of leaving invisible boxes in the DOM flow. */
+@media (hover: none) {
+  .portrait-peek { display: none; }
+}

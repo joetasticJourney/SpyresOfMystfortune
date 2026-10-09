@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spyres of Myst-fortune — Setup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('spyres-theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && prefersDark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) { /* localStorage disabled — fall back to light */ }
+    })();
+  </script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="masthead-top">
+        <div class="masthead-brand">
+          <a href="index.html" class="masthead-logo-link">
+            <img src="images/CampaignIcon.png" alt="Spyres of Myst-fortune logo" class="masthead-logo">
+          </a>
+          <h1 class="wordmark">Spyres of <span class="flourish">Myst-fortune</span></h1>
+        </div>
+        <button class="theme-toggle" type="button"
+                aria-label="Toggle dark mode" title="Toggle dark mode"
+                onclick="spyresToggleTheme()">
+          <span id="theme-icon" aria-hidden="true">☾</span>
+        </button>
+      </div>
+      <nav class="ledger-nav">
+        <a href="index.html" class="active">Setup</a>
+        <a href="ledger.html" class="">Ledger</a>
+        <a href="characters.html" class="">Characters</a>
+        <a href="enemies.html" class="">Enemies</a>
+        <a href="quests.html" class="">Quests &amp; Threads</a>
+        <a href="lore.html" class="">Lore</a>
+      </nav>
+    </div>
+  </header>
+  <script>
+    /* Sync the toggle icon with the current theme on load, then flip on click. */
+    (function () {
+      var iconFor = function (theme) { return theme === 'dark' ? '☀' : '☾'; };
+      var iconEl = document.getElementById('theme-icon');
+      if (iconEl) {
+        iconEl.textContent = iconFor(document.documentElement.getAttribute('data-theme'));
+      }
+      window.spyresToggleTheme = function () {
+        var cur = document.documentElement.getAttribute('data-theme');
+        var next = cur === 'dark' ? 'light' : 'dark';
+        if (next === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+        try { localStorage.setItem('spyres-theme', next); } catch (e) {}
+        if (iconEl) iconEl.textContent = iconFor(next);
+      };
+    })();
+  </script>
+  <main>
+    
+  <div class="eyebrow">Campaign setup</div>
+
+  
+    <h1 class="section-head">Spyres of Myst-fortune</h1>
+    
+      <p><em>Steampunk post-apocalypse — the last humanoids live in skyscrapers above a toxic mist.</em></p>
+    
+
+    
+      <h2 class="section-head">Premise</h2>
+      <div class="ledger">
+        <div class="entry">
+          <span class="seal active"></span>
+          <span><span class="entry-body">The world is blanketed in a great thick mist that has made the ground uninhabitable. The last living humanoids cling to survival inside enormous towers built by a long-forgotten civilization. Though the mist has driven civilization skyward, it also gave extraordinary gifts: unlimited energy, buoyant gases, and a power all but indistinguishable from magic. Trapped in limited space, artifice fueled by mist-based technology has kept the towers alive — for now.</span></span>
+        </div>
+      </div>
+    
+
+    
+      <h2 class="section-head">Setting</h2>
+      <div class="ledger">
+        <div class="entry">
+          <span class="seal active"></span>
+          <span><span class="entry-body">A ~12-session steampunk campaign using the D&amp;D 5.5 framework. Steampunk post-apocalyptic world where the last humanoids live in skyscrapers above a toxic mist. The myst is full of monsters — &#39;Myst Demons&#39; — and sub-humanoid Morlocks.</span></span>
+        </div>
+      </div>
+    
+
+    
+      <h2 class="section-head">System</h2>
+      <div class="ledger">
+        <div class="entry">
+          <span class="seal active"></span>
+          <span><span class="entry-body">D&amp;D 5.5 (2024). Combat and encounters run through a fully-automated Foundry VTT environment. AI-crafted custom maps, monsters, and NPCs. Sessions are transcribed and sorted into session / quest / character / NPC entries on this dashboard.</span></span>
+        </div>
+      </div>
+    
+
+    
+      <h2 class="section-head">Character Creation
+        
+          <span class="count">4</span>
+        
+      </h2>
+      <div class="ledger">
+        
+          
+          <div class="entry">
+            <span class="seal active"></span>
+            <span>
+              
+                <span class="entry-title">Gods &amp; patrons</span>
+                <span class="entry-body">Not a D&amp;D-lore setting. Gods and patrons need to be cooked up by players for the setting, or roll the dice on what the DM makes for you. Gods here are manifestations of belief — get as creative as you want.</span>
+              
+            </span>
+          </div>
+          
+          <div class="entry">
+            <span class="seal active"></span>
+            <span>
+              
+                <span class="entry-title">Backstory</span>
+                <span class="entry-body">Make up whatever you want for character backstory and it will be incorporated into the world. No limits. The more creative, the better.</span>
+              
+            </span>
+          </div>
+          
+          <div class="entry">
+            <span class="seal active"></span>
+            <span>
+              
+                <span class="entry-title">Stat rolls</span>
+                <span class="entry-body">Rolling for stats: reroll 1s one time. If you roll terribly you can fall back to point buy.</span>
+              
+            </span>
+          </div>
+          
+          <div class="entry">
+            <span class="seal active"></span>
+            <span>
+              
+                <span class="entry-title">Backup character</span>
+                <span class="entry-body">Plan a backup character in case something… happens.</span>
+              
+            </span>
+          </div>
+          
+        
+      </div>
+    
+
+    
+      <h2 class="section-head">House Rules
+        
+          <span class="count">4</span>
+        
+      </h2>
+      <div class="ledger">
+        
+          
+          <div class="entry">
+            <span class="seal active"></span>
+            <span>
+              
+                <span class="entry-title">Pistols &amp; muskets</span>
+                <span class="entry-body">Pistols and muskets are simple weapons and as common (price) as swords. Pistols count as light weapons.</span>
+              
+            </span>
+          </div>
+          
+          <div class="entry">
+            <span class="seal active"></span>
+            <span>
+              
+                <span class="entry-title">Cantrips scale up one die</span>
+                <span class="entry-body">Cantrips cast as if you were one die-step higher — so your cantrips at level 5 are cast as if you were level 11.</span>
+              
+            </span>
+          </div>
+          
+          <div class="entry">
+            <span class="seal active"></span>
+            <span>
+              
+                <span class="entry-title">Heroic Inspiration</span>
+                <span class="entry-body">Disregard all D&amp;D 5.5 sources of Heroic Inspiration. Heroic Inspiration is awarded only through roleplay, plus a weekly opportunity for each player to declare a fun fact about their character.</span>
+              
+            </span>
+          </div>
+          
+          <div class="entry">
+            <span class="seal active"></span>
+            <span>
+              
+                <span class="entry-title">Evil-PC vote-kick</span>
+                <span class="entry-body">If you lean too evil, the party can secret-vote to kick you out. You switch to your backup character, and the DM promotes your previous PC to a new villain for the campaign.</span>
+              
+            </span>
+          </div>
+          
+        
+      </div>
+    
+
+    
+      <h2 class="section-head">Tone</h2>
+      <div class="ledger">
+        <div class="entry">
+          <span class="seal active"></span>
+          <span><span class="entry-body">Strong to outlandish character choices welcome. The table motto is &#39;yes, and&#39; — if you bring it, the DM will build on it.</span></span>
+        </div>
+      </div>
+    
+
+    
+
+    
+      <h2 class="section-head">Schedule</h2>
+      <div class="ledger">
+        <div class="entry">
+          <span class="seal active"></span>
+          <span><span class="entry-body">~12 sessions planned. 3–4 hour sessions on Tuesdays or Thursdays, starting between 6–9 PM PST. Date and time depending on group availability.</span></span>
+        </div>
+      </div>
+    
+
+    
+      <h2 class="section-head">The World</h2>
+      
+      
+        <img class="world-map" src="images/World.png?v=1791518564" alt="World map">
+      
+      <div class="ledger">
+        <div class="entry">
+          <span class="seal active"></span>
+          <span><span class="entry-body">The ground is lost — a great thick toxic mist blankets the surface, patrolled by Myst Demons and sub-humanoid Morlocks. The last humanoids live inside enormous towers (Spyres) built by a long-forgotten civilization. Each Spyre has its own economy, politics, and specialty; trade between them is primarily by dirigible along contested airship routes. Mist-based artifice (unlimited energy, buoyant gases, magic-equivalent power) is the only reason the Spyres are still alive — for now.</span></span>
+        </div>
+      </div>
+    
+
+    
+      <h2 class="section-head">The Spyres <span class="count">6</span></h2>
+      <div class="ledger">
+        
+          <div class="entry has-portrait">
+            <span class="seal active"></span>
+            <span class="portrait-wrap">
+  <img class="portrait" src="images/the-parkeys.png?v=1791518313" alt="The Parkeys">
+    <img class="portrait-peek" src="images/the-parkeys.png?v=1791518313" alt="" aria-hidden="true">
+  
+</span>
+            <span>
+              <span class="entry-title">The Parkeys</span>
+              <span class="entry-body">Agricultural Spyres at the top of the map. Every building has extended platforms for growing crops — mostly potatoes, grains, and greens — and every square foot is dedicated to food production. Labor jobs are abundant here; aristocratic luxuries such as commissioned music are largely absent.</span>
+            </span>
+          </div>
+        
+          <div class="entry has-portrait">
+            <span class="seal active"></span>
+            <span class="portrait-wrap">
+  <img class="portrait" src="images/the-empire.png?v=1791518306" alt="The Empire">
+    <img class="portrait-peek" src="images/the-empire.png?v=1791518306" alt="" aria-hidden="true">
+  
+</span>
+            <span>
+              <span class="entry-title">The Empire</span>
+              <span class="entry-body">The kings of commerce, ruled by an elven emperor and his family for as long as anyone can remember. They hold a monopoly on the dirigibles that ply the trade routes between towers. Many of their buildings are draped in private fruited trees reserved for the upper caste. The lower levels of the Empire are populated by servants and a crushed underclass.</span>
+            </span>
+          </div>
+        
+          <div class="entry has-portrait">
+            <span class="seal active"></span>
+            <span class="portrait-wrap">
+  <img class="portrait" src="images/the-yards.png?v=1791518320" alt="The Yards">
+    <img class="portrait-peek" src="images/the-yards.png?v=1791518320" alt="" aria-hidden="true">
+  
+</span>
+            <span>
+              <span class="entry-title">The Yards</span>
+              <span class="entry-body">Industrial towers to the west, focused on building and salvage. They operate small mist boats that trawl the surface of the mist with magnets, dragging up the abundant scrap metal beneath. Salvage is reforged to fuel the artifice of every tower. Hazmat-suited scavengers can also descend below the towers on foot for more targeted finds. The lower levels are perpetually coated in oily residue dripping down from the machinery above. Twelve-hour shifts with no breaks are the labor norm.</span>
+            </span>
+          </div>
+        
+          <div class="entry has-portrait">
+            <span class="seal active"></span>
+            <span class="portrait-wrap">
+  <img class="portrait" src="images/the-wotsy.png?v=1791518330" alt="The Wotsy">
+    <img class="portrait-peek" src="images/the-wotsy.png?v=1791518330" alt="" aria-hidden="true">
+  
+</span>
+            <span>
+              <span class="entry-title">The Wotsy</span>
+              <span class="entry-body">Aristocratic towers to the south with an extreme gun culture. The Wotsy mass-produce muskets, pistols, ammunition, and explosive powder for the towers. Virtually everyone carries one or more firearms, using them to settle disputes, for leisure, and to punctuate sentences. The tower&#39;s religious faction spends most of its time healing bullet wounds, so actual deaths from gunfire are exceedingly rare — and, when they do occur, spark blood feuds. A vibrant young Wotsy adult is expected to be littered with circular scars.</span>
+            </span>
+          </div>
+        
+          <div class="entry has-portrait">
+            <span class="seal active"></span>
+            <span class="portrait-wrap">
+  <img class="portrait" src="images/the-lers.png?v=1791518337" alt="The Lers">
+    <img class="portrait-peek" src="images/the-lers.png?v=1791518337" alt="" aria-hidden="true">
+  
+</span>
+            <span>
+              <span class="entry-title">The Lers</span>
+              <span class="entry-body">A single tower infested with wild and livestock rats. The Lers are the only carnivorous population in the world; they produce the two forms of animal protein available anywhere: rats and pigeons. Actual meat-eating is almost exclusively the province of Lers citizens and the wealthiest families of the other towers, for whom rat meat is a delicacy. Attempting to transfer live animals out of Lers to any other tower is punishable by death.</span>
+            </span>
+          </div>
+        
+          <div class="entry has-portrait">
+            <span class="seal active"></span>
+            <span class="portrait-wrap">
+  <img class="portrait" src="images/the-lynders.png?v=1791518348" alt="The Lynders">
+    <img class="portrait-peek" src="images/the-lynders.png?v=1791518348" alt="" aria-hidden="true">
+  
+</span>
+            <span>
+              <span class="entry-title">The Lynders</span>
+              <span class="entry-body">The lone outlier tower to the far southeast. Pirates who openly foster the use of magic, unlike the five lower towers where it is criminalized. Short on real estate, they survive by pirating the trade routes of the other towers and by defending their tower with formidable defense batteries. Their airships are cheap, abundant, and unreliable, so they offset a high rate of pirate attrition with unrelenting reproduction. They use small steam-propelled gliders to swarm target ships and drop boarders. When a formal dirigible navy shows up, the pirates prefer immediate escape over pitched battle.</span>
+            </span>
+          </div>
+        
+      </div>
+    
+
+    
+      <h2 class="section-head">Content Warnings</h2>
+      <div class="ledger">
+        <div class="entry">
+          <span class="seal active"></span>
+          <span><span class="entry-body">Expect a lot of classism, violence, death, gore, murder, and a little cannibalism. The DM runs &#39;yes, and&#39; on anything brought to the table — so if something is a hard no, flag it before the session or as it comes up. Mostly: don&#39;t be an asshole to other players.</span></span>
+        </div>
+      </div>
+    
+
+    
+  
+
+  </main>
+  <footer>
+    Kept locally on your machine · 0 session(s) chronicled
+    
+  </footer>
+</body>
+</html>
