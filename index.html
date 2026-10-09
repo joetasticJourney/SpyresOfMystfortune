@@ -13,11 +13,12 @@
     (function () {
       try {
         var saved = localStorage.getItem('spyres-theme');
-        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (saved === 'dark' || (!saved && prefersDark)) {
+        if (saved !== 'light') {
           document.documentElement.setAttribute('data-theme', 'dark');
         }
-      } catch (e) { /* localStorage disabled — fall back to light */ }
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
     })();
   </script>
 </head>
@@ -342,8 +343,8 @@
           <div class="entry has-portrait">
             <span class="seal active"></span>
             <span class="portrait-wrap">
-  <img class="portrait" src="images/the-lynders.png?v=1791518348" alt="The Lynders">
-    <img class="portrait-peek" src="images/the-lynders.png?v=1791518348" alt="" aria-hidden="true">
+  <img class="portrait" src="images/the-lynders.png?v=1791523497" alt="The Lynders">
+    <img class="portrait-peek" src="images/the-lynders.png?v=1791523497" alt="" aria-hidden="true">
   
 </span>
             <span>

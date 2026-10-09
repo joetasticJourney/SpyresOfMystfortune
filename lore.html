@@ -13,11 +13,12 @@
     (function () {
       try {
         var saved = localStorage.getItem('spyres-theme');
-        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (saved === 'dark' || (!saved && prefersDark)) {
+        if (saved !== 'light') {
           document.documentElement.setAttribute('data-theme', 'dark');
         }
-      } catch (e) { /* localStorage disabled — fall back to light */ }
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
     })();
   </script>
 </head>
